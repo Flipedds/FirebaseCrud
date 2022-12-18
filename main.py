@@ -22,6 +22,7 @@ def cadastrar():
 	requisicao = requests.post(f'{link}/produto/.json',data=json.dumps(dados))
 	
 	print(requisicao)
+	#mostra o id do produto cadastrado
 	print(requisicao.text)
 
 #get de tudo do banco
@@ -56,7 +57,7 @@ def deletar():
 	#requisição para deletar
 	requisicao = requests.delete(f'{link}/produto/{opcao}/.json')
 	print(requisicao)
-    print(requisicao.text)
+	print(requisicao.text)
 
 #início da escolha
 print("o que deseja fazer")
