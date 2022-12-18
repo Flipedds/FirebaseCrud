@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+
 #crud da api firebase
 
 # usar link da api da firebase
@@ -38,6 +39,18 @@ def pesquisar():
 	#escolher apenas uma parte do dicionario
 	print(dic['produto'])
 
+#atualizar registro por id	
+def update():
+	nome=input("digite o nome:")
+	preco=input("digite o preço:")
+	quant=input("digite a quantidade:")
+	dados ={f'nome': nome,'preco': preco,'quantidade':quant}
+	print("qual registro deseja deletar/n")
+	opcao = input("")
+	requisicao = requests.patch(f'{link}/produto/{opcao}/.json',data=json.dumps(dados))
+	
+	print(requisicao)
+	print(requisicao.text)
 	
 #deletar o registro pela chave
 def deletar():
@@ -61,12 +74,14 @@ def deletar():
 
 #início da escolha
 print("o que deseja fazer")
-opcao = input("1-cadastrar 2-pesquisar 3-deletar\n")
+opcao = input("1-cadastrar 2-pesquisar 3-deletar 4-atualizar")
 if opcao == "1":	
 	cadastrar()
 elif opcao == "2":
 	pesquisar()
 elif opcao == "3":
 	deletar()
+elif opcao == "4":
+	update()
 else:
-	print("não encontrado")
+	print("erro")
