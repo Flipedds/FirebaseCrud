@@ -9,15 +9,18 @@ import os
 
 link = os.environ['LINK']
 
-#inserir dados no banco
+#inserir dados do produto no banco
+#pode ser inserido outros dados
 def cadastrar():
 	nome=input("digite o nome:")
 	preco=input("digite o preço:")
 	quant=input("digite a quantidade:")
 	#dados formatados a serem inseridos
 	dados ={f'nome': nome,'preco': preco,'quantidade':quant}
-	#inserindo dados no firebase por meio de requisição post
+	#inserindo dados no firebase por meio de requisição post. 
+	#json.dumps transforma em json o dicionário.
 	requisicao = requests.post(f'{link}/produto/.json',data=json.dumps(dados))
+	
 	print(requisicao)
 	print(requisicao.text)
 
@@ -53,7 +56,7 @@ def deletar():
 	#requisição para deletar
 	requisicao = requests.delete(f'{link}/produto/{opcao}/.json')
 	print(requisicao)
-
+    print(requisicao.text)
 
 #início da escolha
 print("o que deseja fazer")
