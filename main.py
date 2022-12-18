@@ -32,12 +32,37 @@ def pesquisar():
 	#transforma requisição em dicionário python
 	dic = requisicao.json()
 	#escolher apenas uma parte do dicionario
-	print(dic['produto']['id1']['nome'])
+	print(dic['produto'])
+
 	
+#deletar o registro pela chave
+def deletar():
+	requisicao = requests.get(f"{link}.json")
+	#mostra o código do request
+	print(requisicao)
+	print("")
+	#transforma requisição em dicionário python
+	dic = requisicao.json()
+	#escolher apenas uma parte do dicionario
+	#mostra as chaves que podem ser deletadas
+	print(dic['produto'].keys())
+	
+	#escolha de registro
+	print("qual registro deseja deletar/n")
+	opcao = input("")
+	#requisição para deletar
+	requisicao = requests.delete(f'{link}/produto/{opcao}/.json')
+	print(requisicao)
+
+
 #início da escolha
 print("o que deseja fazer")
-opcao = input("1-cadastrar 2-pesquisar\n")
+opcao = input("1-cadastrar 2-pesquisar 3-deletar\n")
 if opcao == "1":	
 	cadastrar()
-else:
+elif opcao == "2":
 	pesquisar()
+elif opcao == "3":
+	deletar()
+else:
+	print("não encontrado")
