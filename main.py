@@ -28,17 +28,19 @@ def cadastrar():
 
 #get de tudo do banco
 def pesquisar():
-	requisicao = requests.get(f"{link}.json")
+	print("digite qual registro deseja pesquisar")
+	opcao = input("")
+	requisicao = requests.get(f"{link}/produto/{opcao}/.json")
 	#mostra o código do request
-	print(requisicao)
 	#mostra o que tem na requisição
-	print(requisicao.text)
-	print("")
+	txt = requisicao.text
 	#transforma requisição em dicionário python
-	dic = requisicao.json()
-	#escolher apenas uma parte do dicionario
-	print(dic['produto'])
-
+	dic=json.loads(txt)
+	nome = dic['nome']
+	preco = dic['preco']
+	quantidade = dic['quantidade']
+	req_txt = f"nome:{nome} preço:{preco} quantidade:{quantidade}"
+	print(req_txt)
 #atualizar registro por id	
 def update():
 	nome=input("digite o nome:")
